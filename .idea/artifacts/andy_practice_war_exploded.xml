@@ -15,6 +15,7 @@
           <element id="module-output" name="andy-practice" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.22" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.3.22" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.3.22" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.3.22" />
