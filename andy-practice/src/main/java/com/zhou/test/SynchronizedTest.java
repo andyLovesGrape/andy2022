@@ -1,10 +1,12 @@
 package com.zhou.test;
 
+import org.junit.Test;
+
 /**
  * @author zhouyuanke
  * @date 2022/9/8 23:32
  */
-public class SynchronizedDemo {
+public class SynchronizedTest {
     private static final int TEN = 10;
 
     static class TestRunnable implements Runnable {
@@ -27,7 +29,8 @@ public class SynchronizedDemo {
         }
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test1() {
         TestRunnable thread = new TestRunnable("synchronized");
         new Thread(thread).start();
         new Thread(thread).start();
