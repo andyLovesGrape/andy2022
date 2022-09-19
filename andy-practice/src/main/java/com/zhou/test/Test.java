@@ -3,6 +3,7 @@ package com.zhou.test;
 import com.alibaba.fastjson.JSON;
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -11,13 +12,25 @@ import java.util.Optional;
  */
 public class Test {
     public static void main(String[] args) {
-        int num = 2;
-        System.out.println(--num);
+        Map<Integer, Integer>
+    }
+
+    private static void test2() {
+        String str = "pwwkew";
+        System.out.println(str.substring(0, 2));
+        System.out.println(str.substring(3));
+        System.out.println(str.contains("w"));
+        System.out.println(str.charAt(3));
+        System.out.println(str.length());
+        System.out.println(str.indexOf(3));
+        System.out.println(str.substring(3, 4));
+        System.out.println(str.toString());
     }
 
     private static void test1() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, -20);
+        System.out.println(calendar.getTimeInMillis());
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
         System.out.println(calendar.getTimeInMillis());
         calendar.add(Calendar.MINUTE, 10);
         System.out.println(calendar.getTimeInMillis());
