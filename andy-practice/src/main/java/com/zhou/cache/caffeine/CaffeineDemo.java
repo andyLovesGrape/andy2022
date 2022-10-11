@@ -1,4 +1,4 @@
-package com.zhou.caffeine;
+package com.zhou.cache.caffeine;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
