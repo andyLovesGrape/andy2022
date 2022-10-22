@@ -1,7 +1,11 @@
 package com.zhou.test;
 
 import com.alibaba.fastjson.JSON;
+import lombok.SneakyThrows;
+
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -10,9 +14,9 @@ import java.util.Optional;
  * @date 2022/9/9 16:28
  */
 public class Test {
+    @SneakyThrows
     public static void main(String[] args) {
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println(Integer.MIN_VALUE);
+        System.out.println(null + "");
     }
 
     private static void test2() {
