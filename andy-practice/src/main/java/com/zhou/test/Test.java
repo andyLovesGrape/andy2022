@@ -1,12 +1,12 @@
 package com.zhou.test;
 
 import com.alibaba.fastjson.JSON;
+import com.zhou.common.TestEntity;
 import lombok.SneakyThrows;
-
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -16,7 +16,14 @@ import java.util.Optional;
 public class Test {
     @SneakyThrows
     public static void main(String[] args) {
-        System.out.println(null + "");
+        TestEntity entity = new TestEntity();
+        entity.setCode(1);
+        entity.setMap(null);
+        Map<Integer, String> map = Optional
+                .ofNullable(entity)
+                .map(TestEntity::getMap)
+                .orElseGet(Collections::emptyMap);
+        System.out.println(map.get(1));
     }
 
     private static void test2() {

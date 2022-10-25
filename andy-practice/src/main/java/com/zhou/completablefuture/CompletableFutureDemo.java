@@ -192,9 +192,8 @@ public class CompletableFutureDemo {
             sleep(1000);
             return "hello world";
         }).whenComplete((s, throwable) -> System.out.println("future3 is ok, result is " + s));
-        sleep(2000);
-        CompletableFuture.allOf(future1, future2, future3);
-        CompletableFuture.anyOf(future1, future2, future3);
+        future3.cancel(true);
+        System.out.println(future3.isCompletedExceptionally());
     }
 
     public static void main(String[] args) {
