@@ -196,7 +196,17 @@ public class CompletableFutureDemo {
         System.out.println(future3.isCompletedExceptionally());
     }
 
+    private static void allOfDemo() {
+        CompletableFuture<Integer> num1 = CompletableFuture.supplyAsync(() -> new Random().nextInt(10));
+        CompletableFuture<Integer> num2 = CompletableFuture.supplyAsync(() -> new Random().nextInt(10));
+        CompletableFuture<Integer> num3 = CompletableFuture.supplyAsync(() -> new Random().nextInt(10));
+        System.out.println(CompletableFuture.allOf(num1, num2, num3)
+                .thenApply((Function<Void, Object>) unused -> {
+                    return "num1: " + num1.join() + " num2: " + num2.join() + " num3: " + num3.join();
+                }).join());
+    }
+
     public static void main(String[] args) {
-        otherDemo();
+        allOfDemo();
     }
 }

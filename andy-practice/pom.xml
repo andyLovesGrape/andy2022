@@ -35,6 +35,16 @@
       <artifactId>caffeine</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.reactivex.rxjava3</groupId>
+      <artifactId>rxjava</artifactId>
+      <version>3.1.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.meituan.mbop</groupId>
+      <artifactId>mbop-resilience-hystrix</artifactId>
+      <version>3.1.5.6</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
       <version>4.1</version>

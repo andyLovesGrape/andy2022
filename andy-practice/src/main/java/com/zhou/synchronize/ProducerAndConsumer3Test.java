@@ -9,6 +9,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
+ * 新建了两个condition，分别对应消息队列满和空的两种情况
+ * condition的好处在于，用await()替换wait()、用signal()替换notify()、用signalAll()替换notifyAll()，可以唤醒指定的线程
+ *
  * @author zhouyuanke
  * @date 2022/9/15 23:06
  */

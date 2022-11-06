@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * 这个同样是用synchronize来实现，只不过这个锁的是消息队列
+ * 可以使用ReentrantLock可重入锁，性能比synchronize更好
+ *
  * @author zhouyuanke
  * @date 2022/9/14 22:49
  */

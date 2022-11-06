@@ -1,13 +1,11 @@
 package com.zhou.test;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.zhou.common.TestEntity;
 import lombok.SneakyThrows;
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author zhouyuanke
@@ -16,6 +14,10 @@ import java.util.Optional;
 public class Test {
     @SneakyThrows
     public static void main(String[] args) {
+        System.out.println(Lists.newArrayList(132718281, 302981687, 111008770).contains(132718281));
+    }
+
+    private static void test3() {
         TestEntity entity = new TestEntity();
         entity.setCode(1);
         entity.setMap(null);

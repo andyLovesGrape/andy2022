@@ -1,9 +1,6 @@
 package com.zhou.cache;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.*;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -37,8 +34,8 @@ public class GuavaCacheDemo {
     }
 
     private static String getCityFromDb(Integer code) {
-        sleep(1000);
-        return dbData.get(code) + " " + new Random().nextInt(10);
+        sleep(3000);
+        return dbData.get(code) + " " + System.currentTimeMillis();
     }
 
     @SneakyThrows
@@ -128,11 +125,63 @@ public class GuavaCacheDemo {
         }
     }
 
-    private static void other() {
-        Cache<Integer, String> cache = CacheBuilder.newBuilder().build();
+    @SneakyThrows
+    private static void expireAndRefreshDemo() {
+        LoadingCache<Integer, String> expireCache = CacheBuilder.newBuilder()
+                .expireAfterAccess(1000, TimeUnit.MILLISECONDS)
+                .removalListener(removalNotification ->
+                        System.out.println("the key " + removalNotification.getKey() + " is removed"))
+                .build(new CacheLoader<Integer, String>() {
+                    @Override
+                    public String load(Integer integer) {
+                        return getCityFromDb(integer);
+                    }
+                });
+        expireCache.put(1, "init value");
+        System.out.println(expireCache.get(1));
+        Thread.sleep(1500);
+        System.out.println(expireCache.get(1));
+        System.out.println("————————————————");
+
+        LoadingCache<Integer, String> refreshCache = CacheBuilder.newBuilder()
+                .refreshAfterWrite(1000, TimeUnit.MILLISECONDS)
+                .removalListener(removalNotification ->
+                        System.out.println("the key " + removalNotification.getKey() + " is removed"))
+                .build(new CacheLoader<Integer, String>() {
+                    @Override
+                    public String load(Integer integer) {
+                        return getCityFromDb(integer);
+                    }
+                });
+        System.out.println(refreshCache.get(1));
+        Thread.sleep(1500);
+        System.out.println(refreshCache.get(1));
+    }
+
+    @SneakyThrows
+    private static void expireDemo() {
+        LoadingCache<Integer, String> cache = CacheBuilder.newBuilder()
+                .expireAfterWrite(1800, TimeUnit.MILLISECONDS)
+                .expireAfterAccess(1300, TimeUnit.MILLISECONDS)
+                .removalListener(removalNotification ->
+                        System.out.println("the key " + removalNotification.getKey() + " is removed"))
+                .build(new CacheLoader<Integer, String>() {
+                    @Override
+                    public String load(Integer integer) {
+                        return getCityFromDb(integer);
+                    }
+                });
+        cache.put(1, "init value");
+        System.out.println(cache.get(1));
+        Thread.sleep(1000);
+        System.out.println(cache.get(1));
+        Thread.sleep(1000);
+        System.out.println(cache.get(1));
+        Thread.sleep(1500);
+        System.out.println(cache.get(1));
     }
 
     public static void main(String[] args) {
-        queryDiffOverdueKey();
+        ();
     }
 }
