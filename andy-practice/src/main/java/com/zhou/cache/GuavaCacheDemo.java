@@ -180,8 +180,4 @@ public class GuavaCacheDemo {
         Thread.sleep(1500);
         System.out.println(cache.get(1));
     }
-
-    public static void main(String[] args) {
-        ();
-    }
 }
