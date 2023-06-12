@@ -1,4 +1,4 @@
-package com.zhou.algorithmproblem.hot100;
+package com.zhou.algorithmproblem;
 
 /**
  * 当容器选择左右两端的柱子时，底是最大的。然后将左边边界右移、右边边界左移，以找到更大的高，获得更大的面积
@@ -6,7 +6,7 @@ package com.zhou.algorithmproblem.hot100;
  * @author zhouyuanke
  * @date 2022/10/24 09:22
  */
-public class MaxArea11 {
+public class MaxArea {
 
     private int maxArea(int[] height) {
         int i = 0, j = height.length - 1, area = 0;
