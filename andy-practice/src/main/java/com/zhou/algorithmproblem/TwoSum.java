@@ -2,8 +2,7 @@ package com.zhou.algorithmproblem;
 
 import org.junit.Assert;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 求两数之和，使用hashMap来记录元素
@@ -32,8 +31,13 @@ public class TwoSum {
     }
 
     public static void main(String[] args) {
+        Queue<Integer> queue = new ArrayDeque<>();
+
         int[] nums = new int[]{2, 7, 11, 15};
         int target = 9;
-        Assert.assertArrayEquals(new int[]{0, 1}, Solution.twoSum(nums, target));
+        for (int i : Arrays.copyOfRange(nums, 0, 2)) {
+            System.out.println(i);
+        }
+        //Assert.assertArrayEquals(new int[]{0, 1}, Solution.twoSum(nums, target));
     }
 }
