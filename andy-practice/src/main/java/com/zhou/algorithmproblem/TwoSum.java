@@ -40,4 +40,9 @@ public class TwoSum {
         }
         //Assert.assertArrayEquals(new int[]{0, 1}, Solution.twoSum(nums, target));
     }
+
+    private List<Integer> addList() {
+        List<Integer> nums = new ArrayList<>();
+        return nums;
+    }
 }
