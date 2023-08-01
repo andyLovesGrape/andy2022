@@ -1,6 +1,12 @@
 package com.zhou.algorithmproblem;
 
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Test;
+import scala.Tuple2;
+
+import java.util.*;
 
 /**
  * @author zhouyuanke
@@ -130,6 +136,7 @@ public class SortMethods {
                 int num = array[start];
                 array[start] = array[i];
                 array[i] = num;
+                // 此时temp的值已经换到i位置
                 start = i;
             } else {
                 break;
@@ -137,10 +144,132 @@ public class SortMethods {
         }
     }
 
+    private int target = -1;
+
+    /**
+     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+     *
+     * @param a int整型一维数组
+     * @param n int整型
+     * @param K int整型
+     * @return int整型
+     */
+    public int findKth(int[] a, int n, int K) {
+        target = K;
+        fastSort(a, 0, a.length - 1);
+        return result;
+    }
+
+    private void fastSort(int[] array, int begin, int end) {
+        // System.out.println(begin + " " + end);
+        if (result != 0 || begin >= end) {
+            return;
+        }
+        int key = array[begin], i = begin, j = end;
+        while (i < j) {
+            while (i <= end && array[i] > key) {
+                i++;
+            }
+            while (j >= 0 && array[j] < key) {
+                j--;
+            }
+            if (i < j && array[i] == array[j]) {
+                i++;
+            } else {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+        // print(array);
+        if (i + 1 == target) {
+            result = array[i];
+        }
+        fastSort(array, begin, i - 1);
+        fastSort(array, i + 1, end);
+    }
+
+
+    public class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public TreeNode reConstructBinaryTree(int[] preOrder, int[] vinOrder) {
+        TreeNode root = recursion(preOrder, vinOrder);
+        return root;
+    }
+
+    private TreeNode recursion(int[] preOrder, int[] vinOrder) {
+        TreeNode root = new TreeNode(preOrder[0]);
+        int index = 0;
+        for (int i = 0; i < vinOrder.length; i++) {
+            if (vinOrder[i] == preOrder[0]) {
+                index = i;
+            }
+        }
+        TreeNode leftNode = null;
+        System.out.println(index);
+        if (index > 0 && index + 1 < preOrder.length) {
+            leftNode = recursion(Arrays.copyOfRange(preOrder, 1, index + 1), Arrays.copyOfRange(vinOrder, 0, index));
+        }
+        TreeNode rightNode = null;
+        if (index < vinOrder.length - 1 && index + 1 < vinOrder.length) {
+            rightNode = recursion(Arrays.copyOfRange(preOrder, index + 1, preOrder.length), Arrays.copyOfRange(vinOrder, index + 1, vinOrder.length));
+        }
+        root.left = leftNode;
+        root.right = rightNode;
+        return root;
+    }
+
+    public ArrayList<String> generateParenthesis(int n) {
+        ArrayList<String> res = new ArrayList<>();
+        recursion(0, 0, new StringBuffer(), res, n);
+        return res;
+    }
+
+    private void recursion(int left, int right, StringBuffer sb, ArrayList<String> res, int n) {
+        if (left == n && right == n) {
+            res.add(new String(sb));
+            return;
+        }
+        if (left < n) {
+            recursion(left + 1, right, sb.append("("), res, n);
+        }
+        if (right < n && left > right) {
+            recursion(left, right + 1, sb.append(")"), res, n);
+        }
+    }
+
     @Test
     public void test() {
-        int[] array = new int[]{2,5,7,3,4,1,8};
-        heapSort(array);
-        print(array);
+        List<String> str1 = new ArrayList<>();
+        String[] array1 = str1.toArray(new String[str1.size()]);
+
+        String[] array2 = new String[]{"111"};
+        List<String> str2 = Arrays.asList(array2);
     }
+
+    public static void main(String[] args) {
+        int num1 = 15;
+        int num2 = 4;
+        System.out.println(num2 & num1);
+        System.out.println(num2 % num1);
+    }
+
+    static class ThreadTest implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i < 100; i++) {
+                nums.add(i);
+            }
+        }
+    }
+
+    private static List<Integer> nums = new ArrayList<>();
 }

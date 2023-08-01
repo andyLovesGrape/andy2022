@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  * 两个线程交替打印 1-100
+ * 使用volatile关键字
  */
-public class ThreadPrint {
+public class ThreadPrint_1 {
     static volatile boolean flag = true;
 
     public static void main(String[] args) {
