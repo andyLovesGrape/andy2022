@@ -150,14 +150,18 @@ public class SortMethods {
      * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
      *
      * @param a int整型一维数组
-     * @param n int整型
      * @param K int整型
      * @return int整型
      */
-    public int findKth(int[] a, int n, int K) {
+    public int findKth(int[] a, int K) {
         target = K;
         fastSort(a, 0, a.length - 1);
         return result;
+    }
+
+    @Test
+    public void test1119() {
+        findKth(new int[]{3,2,1,5,6,4}, 2);
     }
 
     private void fastSort(int[] array, int begin, int end) {
