@@ -1,12 +1,10 @@
 package com.zhou.algorithmproblem;
 
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.lang3.tuple.Triple;
 import org.junit.Test;
-import scala.Tuple2;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author zhouyuanke

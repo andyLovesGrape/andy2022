@@ -11,11 +11,7 @@ import java.util.Set;
 public class JedisDemo {
     public static void main(String[] args) {
         Jedis jedis = new Jedis("127.0.0.1", 6379);
-        System.out.println(jedis.ping());
-        jedis.set("name", "andy");
-        Set<String> keys = jedis.keys("*");
-        for (String key : keys) {
-            System.out.println(jedis.get(key));
-        }
+        System.out.println(jedis.ttl("table:stu3"));
+        System.out.println(jedis.hget("table", "stu3"));
     }
 }

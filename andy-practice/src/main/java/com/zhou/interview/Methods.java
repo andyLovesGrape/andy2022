@@ -1,7 +1,5 @@
 package com.zhou.interview;
 
-import com.zhou.common.Constant;
-
 import java.util.*;
 
 /**
@@ -12,6 +10,107 @@ public class Methods {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
         subarraySum(new int[]{1, 1, 1}, 2);
+    }
+
+    /**
+     * L300 最长递增子序列
+     *
+     * @param nums
+     * @return
+     */
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int[] dp = new int[nums.length];
+        dp[0] = 1;
+        int maxNum = 1;
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+            maxNum = Math.max(maxNum, dp[i]);
+        }
+        return maxNum;
+    }
+
+    /**
+     * L148 排序链表 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 要求时间复杂度为O(nlogn) 空间复杂度为 O(1)
+     * 归并排序 将链表分为两部分，递归排序，然后合并有序链表
+     *
+     *
+     * @param head
+     * @return
+     */
+    public ListNode sortList(ListNode head) {
+        return sortList(head, null);
+    }
+
+    public ListNode sortList(ListNode head, ListNode tail) {
+        if (head == null) {
+            return null;
+        }
+        if (head.next == tail) {
+            // 此时只有一个节点 不包括tail 是递归的结束条件
+            head.next = null;
+            return head;
+        }
+        ListNode slow = head, fast = head;
+        while (fast != tail) {
+            slow = slow.next;
+            fast = fast.next;
+            if (fast != tail) {
+                fast = fast.next;
+            }
+        }
+        ListNode mid = slow;
+        ListNode list1 = sortList(head, mid);
+        ListNode list2 = sortList(mid, tail);
+        return merge(list1, list2);
+    }
+
+    public ListNode merge(ListNode head1, ListNode head2) {
+        // 合并两个有序链表
+        ListNode dummyHead = new ListNode(0);
+        ListNode temp = dummyHead, temp1 = head1, temp2 = head2;
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val <= temp2.val) {
+                temp.next = temp1;
+                temp1 = temp1.next;
+            } else {
+                temp.next = temp2;
+                temp2 = temp2.next;
+            }
+            temp = temp.next;
+        }
+        if (temp1 != null) {
+            temp.next = temp1;
+        } else if (temp2 != null) {
+            temp.next = temp2;
+        }
+        return dummyHead.next;
+    }
+
+    /**
+     * L53 最大子数组和
+     * 动态规划 dp[i] = max(dp[i-1]+nums[i], nums[i])
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int length = nums.length;
+        int[] dp = new int[length];
+        dp[0] = nums[0];
+        int result = dp[0];
+        for (int i = 1; i < length; i++) {
+            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            result = Math.max(dp[i], result);
+        }
+        return result;
     }
 
     class Interval {
@@ -25,7 +124,7 @@ public class Methods {
     }
 
     /**
-     * N89 合并区间
+     * N89 L56 合并区间
      * 对区间进行排序，然后顺序遍历
      *
      * @param intervals
@@ -132,6 +231,7 @@ public class Methods {
 
     /**
      * L560 和为 K 的子数组
+     * 前缀和
      *
      * @param nums
      * @param k
@@ -162,7 +262,7 @@ public class Methods {
      */
     public String longestPalindrome(String s) {
         int length = s.length();
-        if (length < Constant.TWO) {
+        if (length < 2) {
             return s;
         }
 
@@ -223,6 +323,31 @@ public class Methods {
             }
         }
         return str1.substring(index - maxLen + 1, index + 1);
+    }
+
+    /**
+     * L1143 最长公共子序列
+     * 和最长公共子串类似 使用动态规划 区别在于子序列是不连续的 当两个字符不相等时 dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+     * 而子串是连续的 当两个字符不相等时 dp[i][j] = 0
+     *
+     * @param text1
+     * @param text2
+     * @return
+     */
+    public int longestCommonSubsequence(String text1, String text2) {
+        char[] chars1 = text1.toCharArray();
+        char[] chars2 = text2.toCharArray();
+        int[][] dp = new int[chars1.length + 1][chars2.length + 1];
+        for (int i = 1; i <= chars1.length; i++) {
+            for (int j = 1; j <= chars2.length; j++) {
+                if (chars1[i - 1] == chars2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+        return dp[chars1.length][chars2.length];
     }
 
     /**
@@ -310,7 +435,7 @@ public class Methods {
     }
 
     /**
-     * 二叉树层序遍历, 使用队列
+     * L102 二叉树层序遍历, 使用队列
      *
      * @param root
      * @return
@@ -321,7 +446,7 @@ public class Methods {
             return result;
         }
         Queue<TreeNode> queue = new ArrayDeque<>();
-        int size = 0;
+        int size;
         queue.add(root);
         while (!queue.isEmpty()) {
             size = queue.size();
