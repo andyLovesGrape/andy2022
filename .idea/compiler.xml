@@ -10,8 +10,5 @@
         <module name="andy-practice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="andy-practice" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

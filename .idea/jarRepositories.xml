@@ -3,11 +3,6 @@
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
       <option name="id" value="central" />
-      <option name="name" value="Central Repository" />
-      <option name="url" value="http://pixel.sankuai.com/repository/mtdp" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="central" />
       <option name="name" value="central" />
       <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
     </remote-repository>
@@ -15,6 +10,11 @@
       <option name="id" value="rdc-snapshots" />
       <option name="name" value="rdc-snapshots" />
       <option name="url" value="https://packages.aliyun.com/maven/repository/2311073-snapshot-IG4QPM" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://pixel.sankuai.com/repository/mtdp" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
